@@ -1,0 +1,154 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.pro{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    /* background-color: gray;
+    background-image: url("bg.jpg");
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+}
+.login{
+    background-color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin-top: 150px;
+    margin-left: 1000px;
+    width: 360px;
+    height: 400px;
+    display: inline-block;
+    border-radius: 15px;
+}
+.reg{
+    background-color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin-top: 70px;
+    margin-left: 1000px;
+    width: 360px;
+    height: 600px;
+    display: inline-block;
+    border-radius: 15px;
+
+}
+.reginfo{
+    width: 360px;
+    height: 193px;
+    /* border: 1px solid black; */
+    overflow-y: scroll;
+}
+.reginfo::-webkit-scrollbar{
+    display: none;
+}
+.tab{
+    margin: auto;
+    margin-top: 20px;
+    border-spacing: 0 30px;
+}
+.in1,.in2{
+    border: 1px solid black;
+    width: 250px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 20px;
+    display:flex;
+}
+.in1:hover,.in2:hover{
+    border: 1px solid cornflowerblue;
+}
+.username,.userpass{
+    margin: auto;
+    width: 230px;
+    height: 30px;
+    align-items: center;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.btn{
+    margin-top: 15px;
+    color: white;
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color:rgb(78,110, 242);
+    border: 0;
+}
+.btn1{
+    margin-top: 10px;
+    color: white;
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color:rgb(108,123,139);
+    border: 0;
+}
+video{
+
+    position: fixed;
+
+    right:0;
+
+    bottom: 0;
+
+    min-width: 100%;
+
+    min-height: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    z-index: -9999;
+
+    /*灰色调*/
+
+    /*-webkit-filter:grayscale(100%)*/
+
+}
+.msg{
+    width: 100%;
+    height: 20px;
+    /*border: 1px solid black;*/
+}
+.navi{
+    display:flex;
+    width: 100%;
+    height: 20.5vh;
+    /* border: 1px solid black;   */
+    background-color: rgba(255,255,255,0.7);
+}
+.logo{
+    display:inline-block;
+    /* margin-left: 32vw; */
+    margin: auto;
+    width: 30vw;
+    height: 20vh;
+    /* border: 1px solid black; */
+    background-image: url(../img/logo.jpg.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.btnpro{
+    margin: auto;
+    margin-top: 30%;
+    /* border: 1px solid black; */
+    width: 20vw;
+    height: 10vh;
+}
+.welcome{
+
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    font-size:larger;
+    background-color:rgb(78,110, 242,0.9);
+    border-radius: 25px;
+    color: white;
+    border: 0;
+}

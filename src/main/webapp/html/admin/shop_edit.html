@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+
+<form class="layui-form">
+    <div class="layui-form-item" style="margin-top: 10px;">
+        <div class="layui-inline">
+            <label class="layui-form-label">商店编号</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="sno"  autocomplete="off" class="layui-input" th:value="${shop.sno}" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">商店名</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="sname"  autocomplete="off" class="layui-input" th:value="${shop.sname}" lay-verify="required" >
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;">
+        <div class="layui-inline">
+            <label class="layui-form-label">资格证书</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="scert"  autocomplete="off" class="layui-input" th:value="${shop.scert}" lay-verify="required">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">持有人ID</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="aid"  autocomplete="off" class="layui-input" th:value="${shop.aid}" lay-verify="required">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="slocal" autocomplete="off" lay-verify="required" class="layui-input" th:value="${shop.slocal}">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">营业状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sstat" value="营业中" title="营业中" th:checked="${shop.sstat == '营业中'}">
+            <input type="radio" name="sstat" value="休息中" title="休息中" th:checked="${shop.sstat == '休息中'}">
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit lay-filter="submitbtn">提交</button>
+            </div>
+        </div>
+</form>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+
+<script th:inline="javascript">
+    let contextpath = [[@{/}]];
+
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+
+        form.on('submit(submitbtn)', function (data) {
+            var url = contextpath + 'admin/shop/shop_edit.do';
+            var params={
+                sno:data.field.sno,
+                sname:data.field.sname,
+                slocal:data.field.slocal,
+                scert:data.field.scert,
+                sstat:data.field.sstat,
+                aid:data.field.aid
+        }
+        $.post(url,params,function (response) {
+
+        console.log(response)
+            if (response == 0){
+                parent.layer.msg("编辑失败",{time: 1000})
+        }else {
+                parent.layer.msg("编辑成功", {time: 1000})
+                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(iframeIndex);
+                    parent.layui.table.reload('shop_list')
+
+        }
+        })
+            return false
+        })
+    })
+</script>
+</body>
+</html>

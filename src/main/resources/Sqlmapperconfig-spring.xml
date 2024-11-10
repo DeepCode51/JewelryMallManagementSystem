@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+                PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--自定义别名,自定义的位置必须在properties的下面-->
+    <!--为每个实体类创建别名，默认为小写-->
+    <typeAliases>
+        <package name="com.test.obj"/>
+    </typeAliases>
+</configuration>

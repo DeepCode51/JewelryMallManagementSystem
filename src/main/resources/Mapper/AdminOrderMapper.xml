@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AdminOrderMapper">
+
+    <select id="list_order" resultType="com.test.obj.Order">
+        select * from order_main limit #{start},#{rows}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from order_main
+    </select>
+
+    <select id="count_id" resultType="int">
+        select count(*) from order_main where oid = #{oid}
+    </select>
+
+    <select id="search_id" resultType="com.test.obj.Order">
+        select *from order_main where oid = #{oid} limit #{start},#{rows}
+    </select>
+
+    <update id="update">
+            update order_main
+            <set>
+                <if test="gno != null and gno != '' ">
+                    gno = #{gno},
+                </if>
+                <if test="uid != null and uid != ''">
+                    uid = #{uid},
+                </if>
+                <if test="gname != null and gname != ''">
+                    gname = #{gname},
+                </if>
+                <if test="gprice != null and gprice != ''">
+                    gprice = #{gprice},
+                </if>
+                <if test="pname != null and pname != ''">
+                    pname = #{pname},
+                </if>
+                <if test="oplace != null and oplace != ''">
+                    oplace = #{oplace},
+                </if>
+                <if test="gbig != null and gbig != ''">
+                    gbig = #{gbig},
+                </if>
+                <if test="pcall != null and pcall != ''">
+                    pcall = #{pcall},
+                </if>
+                <if test="stat != null and stat != ''">
+                    stat = #{stat},
+                </if>
+                <if test="ourl != null and ourl != ''">
+                    ourl = #{ourl},
+                </if>
+            </set>
+            where oid = #{oid}
+    </update>
+
+</mapper>

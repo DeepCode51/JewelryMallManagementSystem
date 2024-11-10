@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>踏雪之莹</title>
+    <link rel="stylesheet" th:href="@{/CSS/shop_login.css}" type="text/css">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+<script type="text/javascript">
+    window.onload=function(){
+        var p=document.getElementById("shijian");
+        var nowDate = new Date();
+        var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate();
+        p.value=str;
+    }
+    function check(){
+        var ii1=document.getElementById("pass1");
+        var ii2=document.getElementById("pass2");
+        if(ii1.value!==ii2.value){
+            alert("两次密码输入不一致，请重新输入！");
+            ii1.value='';
+            ii2.value='';
+        }
+    }
+   function checked1(form) {
+        if (form.username.value === "") {
+            alert("请输入账号！");
+            form.username.focus();
+            return false;
+        }
+        if (form.userpass.value === "") {
+            alert("请输入密码！");
+            form.userpass.focus();
+            return false;
+        }
+    }
+   function diaplay(){
+       var traget=document.getElementById("login");
+       var traget1=document.getElementById("reg");
+       traget1.style.display="";
+       traget.style.display="none"
+   }
+   function diaplay2(){
+       var traget=document.getElementById("login");
+       var traget1=document.getElementById("reg");
+       traget.style.display="";
+       traget1.style.display="none"
+   }
+
+</script>
+<body>
+<div class="pro">
+    <div class="login" id="login">
+        <h1 style="margin-top: 35px;">欢迎登录</h1>
+        <form th:action="@{/shop/login}" method="post" onsubmit="return checked1(this)">
+            <table class="tab">
+                <tr>
+                    <td></td><td><div class="in1"><input id="username" class="username" name="aid" type="text" placeholder="账号"></div></td>
+                </tr>
+
+                <tr>
+                    <td></td><td><div class="in2"><input  id="userpass" class="userpass" name="userpass" type="password"placeholder="密码"></div></td>
+                </tr>
+            </table>
+            <div class="msg"><p style="color: red;" th:text="${session.flag}"></p></div>
+            <input class="btn" type="submit" value="立即登陆">
+            <input class="btn1" type="button" onclick="diaplay()" value="立即认证">
+        </form>
+
+    </div>
+    <div class="reg" id="reg" style="display: none;">
+        <h1 style="margin-top: 35px;">商家入驻</h1>
+
+        <form th:action="@{/shop/reg}" method="post" onsubmit="return checked1(this)">
+            <table class="tab1">
+                <tr>
+                    <td>店铺账号：</td><td><div class="in2"><input class="userpass" name="sno" type="text"placeholder="店铺账号"></div></td>
+                </tr>
+                <tr>
+                    <td>店铺名称：</td><td><div class="in2"><input class="userpass" name="sname" type="text"placeholder="店铺名称"></div></td>
+                </tr>
+                <tr>
+                    <td>店铺属地：</td><td><div class="in1"><input class="username" name="slocal" type="text" placeholder="店铺属地"></div></td>
+                </tr>
+
+                <tr>
+                    <td>店铺密码：</td><td><div class="in2"><input class="userpass" id="pass1" name="spass" type="password" placeholder="请输入您的密码"></div></td>
+                </tr>
+                <tr>
+                    <td>确认密码：</td><td><div class="in2"><input class="userpass" id="pass2" name="userpass1" type="password" placeholder="请再次确认您的密码" onblur="check()"></div></td>
+                </tr>
+                <tr>
+                    <td>法人姓名：</td><td><div class="in2"><input class="userpass" name="spname" type="text" placeholder="请输入法人姓名"></div></td>
+                </tr>
+                <tr>
+                    <td>法人身份证号：</td><td><div class="in2"><input class="userpass" name="spsfid" type="text" placeholder="请输入法人身份证号"></div></td>
+                </tr>
+                <tr>
+                    <td>联系电话：</td><td><div class="in2"><input class="userpass" name="call" type="text" placeholder="请输入联系电话"></div></td>
+                </tr>
+                <tr>
+                    <td>上传营业执照：</td><td><div class="in2"><input class="userpass" name="scert" type="file" ></div></td>
+                </tr>
+
+
+            </table>
+            <input class="btn2" type="submit" value="立即注册">
+            <input class="btn3" type="button" onclick="diaplay2()" value="返回登陆"><input id="shijian" name="timerr" type="text" value="" style="display: none"/>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+<body>
+<form class="layui-form" method="post" enctype="multipart/form-data" content="multipart/form-data">
+    <div class="layui-form-item" style="margin-top: 10px;">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">分类名</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="name"  autocomplete="off" class="layui-input"  lay-verify="required" >
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">所属分类</label>
+            <div class="layui-input-inline">
+                <select name="classifyId" id="classifyId" class=" ayui-unselect" lay-filter="classify">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit lay-filter="submitbtn">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+
+
+<script th:inline="javascript">
+    let contextpath = [[@{/}]];
+        function getclassify(){
+            var url = contextpath + "admin/series/getclassify"
+
+            $.post(url,function (response) {
+
+                console.log(response.length)
+                for (var i =  0; i < response.length; i++){
+                    $("#classifyId").append("<option value=\"" + response[i].typeid + "\">" + response[i].typename + "</option>")
+                }
+                layui.form.render("select");
+
+
+            })
+        }
+
+        layui.use('form',function () {
+            getclassify()
+        })
+</script>
+
+<script th:inline="javascript">
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+
+        form.on('submit(submitbtn)', function (data) {
+
+            console.log(data)
+            var url = contextpath + 'admin/series/insert.do';
+            var params={
+                name:data.field.name,
+                classify:data.field.classifyId
+            }
+            $.post(url,params,function (response) {
+
+                console.log(response)
+                if (response == 0){
+                    parent.layer.msg("添加失败",{time: 1000})
+                }else {
+                    parent.layer.msg("添加成功", {time: 1000})
+                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(iframeIndex);
+                    parent.layui.table.reload('series_list')
+
+                }
+            })
+            return false
+        })
+    })
+</script>
+</body>
+</html>

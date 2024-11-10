@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.ShopMapper">
+    <!--查询一个操作-->
+    <select id="login" resultType="com.test.obj.Shop" parameterType="com.test.obj.Shop">
+        select * from shop
+        <where><!--动态SQL语句自行判断，会动态判断是否写where-->
+         <if test="sno!=null">
+            and sno=#{sno}
+         </if>
+         <if test="spass!=null">
+             and spass=#{spass}
+         </if>
+        </where>
+    </select>
+    <select id="findone" resultType="com.test.obj.Shop">
+        select * from shop where sno=#{sno}
+    </select>
+    <insert id="insert" parameterType="com.test.obj.Shop">
+        insert into shop (sno,sname,slocal,spname,spsfid,spass,`call`,money)values(#{sno},#{sname},#{slocal},#{spname},#{spsfid},#{spass},#{call},0)
+    </insert>
+    <update id="update" parameterType="com.test.obj.Shop">
+        update shop set `sname`=#{sname},`slocal`=#{slocal},`spname`=#{spname},`call`=#{call},`money`=#{money}
+        where `sno`=#{sno}
+    </update>
+    <select id="loadgoods" resultType="com.test.obj.Goods">
+        select * from goods_main where shopid=#{shopid}
+    </select>
+    <select id="loadtype" resultType="com.test.obj.Classify">
+        select * from goods_type
+    </select>
+    <update id="updateicon" parameterType="com.test.obj.Shop">
+        update shop set `scert`=#{scert}
+        where `sno`=#{sno}
+    </update>
+</mapper>

@@ -1,0 +1,441 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.pro{
+    width: 100%;
+}
+.navi{
+    display:inline-block;
+    width: 100%;
+    height: 15vh;
+    /* border: 1px solid black;   */
+    background-color: white;  
+}
+.logo{
+    display:inline-block;
+    margin-left: 32vw;
+    width: 30vw;
+    height: 20vh;
+    /* border: 1px solid black; */
+    background-image: url(../img/logo.jpg.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-position: center; */
+}
+.list{
+    display:inline-block;
+    margin-left: 25vw;
+    width: 10vw;
+    height: 5.5vh;
+    /* border: 1px solid black;   */
+}
+.list li{
+    float: left;
+    list-style:none;
+    font-size: larger;
+    margin-left: 15px;  
+    height: 25px;
+    width: 25px;
+    /* border: 1px solid black; */
+}
+.search{
+    background-image: url(../img/search.png);
+    background-size:100% 100%;
+    background-size:cover;
+}
+li{
+    cursor: pointer;
+}
+.home{
+    background-image: url(../img/home.png);
+    background-size:100% 100%;
+    background-size:cover;
+}
+.big{
+    display: flex;
+    width:100%;
+    height: 80vh;
+    background-color: rgba(243, 243, 243);
+    /* border: 1px solid black; */
+}
+.list1{
+    width: 15vw;
+    height: 70vh;
+    /* border: 1px solid black; */
+    margin-left: 10vw;
+    margin-top: 5vh;
+    background-color: white;
+}
+.dephoto{
+    margin: auto;
+    width: 100%;
+    height: 45%;
+    border-bottom:2px solid rgb(0,0,128,0.7);
+    display: block；
+}
+.photo1{
+    margin: auto;
+    margin-top: 10px;
+    width: 130px;
+    height: 130px;
+    /* border:1px solid black; */
+    border-radius: 50%;
+    overflow: hidden;
+}
+.perinfo{
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    /*border: 1px solid black;*/
+}
+.name,.money{
+    /*border: 1px solid black;*/
+    margin: auto;
+    text-align: center;
+}
+.out{
+    /*margin-top: 15px;*/
+    text-align: center;
+    cursor: pointer;
+}
+.out1{
+    margin-top: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.out1 a{
+    text-decoration: none;
+    color: black;
+}
+.out1 a:hover{
+    /* text-decoration: none; */
+    color: gray;
+}
+.out:hover{
+    /* text-decoration: none; */
+    color: gray;
+}
+.out a{
+    text-decoration: none;
+    color: black;
+}
+.photo1 img{
+    width: 100%;
+    height: 100%;
+}
+.myinfo{
+    width: 50vw;
+    height: 70vh;
+    /* border: 1px solid black; */
+    margin-left: 10vw;
+    margin-top: 5vh;
+    background-color: white;
+}
+.myinfo1{
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    line-height: 300%;
+    border-bottom:1px solid black;
+    cursor: pointer;
+}
+.title1{
+    margin-top: 20px;
+    width: 100%;
+    height: 15%;
+    border-bottom:1px solid black;
+}
+
+.bottom{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 25vh;
+    /* border-top: 1px solid gray;
+    border-bottom: 1px solid gray; */
+}
+.bottom a{
+    color: gray;
+    text-decoration: none;
+}
+.join,.call,.afterservice{
+    text-align: center;
+    margin: auto;
+    width: 25vw;
+    height: 25vh;
+    /* border: 1px solid black; */
+    cursor: pointer;
+
+}
+
+.bottom h1{
+    margin-top: 2vh;
+}
+.bottom p{
+   line-height: 120%;
+}
+.tinfo{
+    margin-top: 5vh;
+}
+.litt{
+    margin-top: 5vh;
+    color: gray;
+}
+.litt a:hover{
+    color:black;
+}
+/* 个人信息标题下所有具体数据项大包裹 */
+.info2{
+    display: flex;
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+/*我的收藏外部div*/
+.info3{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    /* border: 1px solid black; */
+    flex-wrap: wrap;
+}
+.orderinfo0{
+    height: 70%;
+    width: 90%;
+    border: 2px solid black;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+}
+.orderinfo0:hover{
+    border: 2px solid rgb(78,110, 242);
+}
+.orderinfo1{
+    height: 100%;
+    width: 30%;
+    /*border: 1px solid black;*/
+    /*margin-left: 2vw;*/
+    /*margin-top: 2vh;*/
+    display: flex;
+    flex-direction: column;
+}
+.otherinfo{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 75%;
+    /*border: 1px solid black;*/
+}
+.likeinfo{
+    height: 60%;
+    width: 25%;
+    border: 1px solid black;
+    margin-left: 3vw;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+.cancelbtn{
+    width: 100%;
+    height: 20px;
+    background-color:rgb(78,110, 242);
+    color: white;
+    bottom: 0;
+    text-align: center;
+    /*cursor: pointer;*/
+    text-decoration: none;
+}
+.orderimg{
+    /*object-fit: cover;*/
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid darkred;
+     /*border: 1px solid black;*/
+
+}
+.orderimg img{
+    object-fit: cover;
+    width: 100%;
+    height: 32vh;
+
+}
+.ordertext{
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    /* border: 1px solid black; */
+    line-height: 180%;
+    text-align: center;
+    font-size: small;
+    overflow: hidden;
+}
+.orderstat{
+    margin-left: auto;
+    width: 20%;
+    height: 100%;
+     /*border: 1px solid black;*/
+    cursor: pointer;
+    background-color: RGB(0,0,120,0.6);
+   /*float: right;*/
+    display: flex;
+}
+.statbtn{
+    margin: auto;
+    width: 100%;
+    /*height: 100%;*/
+    color: white;
+    text-align: center;
+    /*border: 1px solid black;*/
+}
+/* 表单样式 */
+.tab1{
+    margin: auto;
+}
+.tab2{
+    margin-left: 10%;
+    border-spacing: 0 5px;
+}
+.tab{
+    margin: auto;
+    /* width: 80%; */
+    /* border: 1px solid black;*/
+    border-spacing: 0 20px;
+}
+.in2{
+    border-bottom: 1px solid gray;
+    width: 250px;
+    height: 30px;
+    overflow: hidden;
+    /* border-radius: 20px; */
+    display:flex;
+    outline: none;
+}
+.in2:hover{
+    border-bottom: 1px solid cornflowerblue;
+}
+.username,.aid,.call1,.place{
+    outline: none;
+    border: none;
+}
+.btn1{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    position: absolute;
+    top: 85vh;
+    border: none;
+    color: white;
+    background-color: RGB(0,0,128,0.7);
+    cursor: pointer;
+}
+.btn2{
+    position: absolute;
+    top: 85vh;
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    margin-left: 240px;
+    border: none;
+    color: white;
+    background-color: RGB(0,0,128,0.7);
+    cursor: pointer;
+}
+.btn3{
+
+
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    margin-left: 130px;
+    margin-top: 50vh;
+    border: none;
+    color: white;
+    background-color: RGB(0,0,128,0.7);
+    cursor: pointer;
+}
+.myorder{
+    width: 50vw;
+    height: 70vh;
+    /* border: 1px solid black; */
+    margin-left: 10vw;
+    margin-top: 5vh;
+    background-color: white;
+}
+.uploadicon{
+    position:absolute;
+    width: 25vw;
+    height: 60vh;
+    left: 37.5vw;
+    top: 25vh;
+    /* border:1px solid black; */
+    background-color: gray;
+}
+.close11{
+    width: 15px;
+    height: 15px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+    /* background-color: black;/ */
+    background-image: url(../img/close.png);
+    background-size:80% 80%;
+    background-size:cover;
+    background-position: center;
+    cursor: pointer;
+}
+/*取消收藏确认框*/
+.tipDel {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 105;
+    margin-left: -125px;
+    margin-top: -75px;
+    width: 250px;
+    height: 150px;
+    background: #fff;
+    padding: 20px;
+    display: none;
+    text-align: center;
+}
+
+.tipDel p:first-child {
+    margin-bottom: 100px;
+    font-size: 16px;
+}
+
+.tipDel p a {
+    text-decoration: none;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: RGB(0,0,128,0.7);
+    color: #fff;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+.fl {
+    cursor: pointer;
+    float: left;
+}
+.clearfix {
+    zoom: 1;
+}
+.fr {
+    cursor: pointer;
+    float: right;
+}

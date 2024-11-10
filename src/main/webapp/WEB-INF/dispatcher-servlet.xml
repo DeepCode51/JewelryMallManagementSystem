@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+">
+    <!--添加扫描-->
+    <context:component-scan base-package="com.test.*" >
+        <!--只扫描控制器-->
+        <!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+
+    </context:component-scan>
+    <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect" factory-method="aspectOf"/>
+
+    <!--配置mvc注解驱动-->
+    <mvc:annotation-driven/>
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
+<!--        <property name="prefix" value="/html/" />-->
+<!--        <property name="suffix" value=".html" />-->
+<!--    </bean>-->
+    <!--配置thymeleaf视图解析器-->
+    <bean id="viewResolver"
+          class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+    <!--视图优先级-->
+        <property name="order" value="1"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <!--thymeleaf模板-->
+        <property name="templateEngine">
+            <bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+                <property name="templateResolver">
+                    <!--解析规则-->
+                    <bean
+                            class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver
+">
+                        <!--视图前缀-->
+                        <property name="prefix" value="/html/">
+                        </property>
+                        <!--视图后缀-->
+                        <property name="suffix" value=".html"/>
+                        <property name="templateMode" value="HTML5">
+                        </property>
+                        <property name="characterEncoding" value="UTF-8">
+                        </property>
+                        <property name="cacheable" value="false"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+<!--    文件上传大小限制bean-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+    <!--静态资源开放-->
+    <mvc:default-servlet-handler />
+<!--    <mvc:resources mapping="/img1/**" location="file:///D:/IDEA/Hello/Testdemo/img1/"/>-->
+<!--    <mvc:resources mapping="/img1/series/**" location="file:///D:/IDEA/Hello/Testdemo/img1/series/"/>-->
+<!--    <mvc:resources mapping="/img1/photo/**" location="file:///D:/IDEA/Hello/Testdemo/img1/photo/"/>-->
+<!--    <mvc:resources mapping="/img1/lunbo/**" location="file:///D:/IDEA/Hello/Testdemo/img1/lunbo/"/>-->
+<!--    <mvc:resources mapping="/img1/goods/**" location="file:///D:/IDEA/Hello/Testdemo/img1/goods/"/>-->
+    <mvc:resources location="/CSS/" mapping="/CSS/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
+    <mvc:resources location="/vido/" mapping="/vido/**"/>
+</beans>

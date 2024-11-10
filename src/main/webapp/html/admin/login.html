@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>踏雪之莹</title>
+    <link rel="stylesheet" th:href="@{/CSS/test.css}" type="text/css">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+<body>
+<div class="pro">
+    <video id="v1" autoplay muted loop style="width: 100%">
+
+        <source th:src="@{/vido/1.mp4}">
+
+    </video>
+    <div class="login">
+        <h1 style="margin-top: 35px;">欢迎登录</h1>
+        <form th:action="@{/admin/login.do}" method="post">
+            <table class="tab">
+                <tr>
+                    <td></td><td><div class="in1"><input class="username" name="adminname"type="text"placeholder="账号"></div></td>
+                </tr>
+                <tr>
+                    <td></td><td><div class="in2"><input class="userpass"name="password" type="password"placeholder="密码"></div></td>
+                </tr>
+            </table>
+            <input class="btn" type="submit"value="立即登录">
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

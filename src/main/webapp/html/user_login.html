@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>踏雪之莹</title>
+    <link rel="stylesheet" th:href="@{/CSS/test.css}" type="text/css">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+
+<body>
+<div class="pro">
+    <div class="navi">
+        <div class="logo"></div>
+    </div>
+    <video id="v1" autoplay muted loop style="width: 100%">
+        <source th:src="@{/vido/1.mp4}">
+    </video>
+    <div class="btnpro">
+        <a th:href="@{/user/index}"><button class="welcome">进入踏雪</button></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>踏雪之莹</title>
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/CSS/user_index.css}">
+    <script th:if="${session.msg=='fasle'}">
+        alert("支付失败！")
+    </script>
+    <script>
+
+        window.onload=function(){
+            var flag1=document.getElementById("flag");
+            var t1 = document.getElementById("serch");
+            var t2 = document.getElementById("mymess");
+            var timer=null;
+            t1.onmouseover=flag1.onmouseover=function(){
+                if(timer)clearTimeout(timer)
+                t1.style.display=""
+            }
+            t1.onmouseout=flag1.onmouseout=function(){
+                timer=setTimeout(function(){
+                    t1.style.display="none"
+                },1000);
+            }
+            t2.onclick=function(){
+
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="pro">
+    <!-- 导航栏部分 -->
+    <div class="navi">
+        <div class="logo"></div>
+        <div class="list">
+            <ul>
+                <li class="search" title="搜索" id="flag"></li>
+                <a  th:href="@{/user/myinfo}"><li class="my" title="个人信息" id="mymess"></li></a>
+                <a  th:href="@{/user/myinfo}"><li class="order" title="我的订单"></li></a>
+            </ul>
+        </div>
+    </div>
+    <!-- 搜索框 无用时隐藏 -->
+    <div class="searchdiv0" id="serch" style="display: none;">
+        <!-- 搜索内容 -->
+        <div class="searchdiv">
+            <form th:action="@{/user/search}" style="width: 100%;">
+                <input type="text" class="findmess" name="find" placeholder="搜索您感兴趣的珠宝"/>
+                <div class="find"><input type="submit" value="搜索" style="outline: none;border: none;background-color: transparent;color: white;cursor: pointer;"/></div>
+            </form>
+        </div>
+        <!-- 快捷标签库 -->
+        <div class="easytype">
+            <div class="lead"><h3>快捷标签</h3></div>
+            <!-- 这里我们for each渲染 -->
+            <div class="types" th:each="lists : ${serieslist}"><h4><a th:href="@{'/good/series?seriesid='+${lists.seriesid}}" th:text="${lists.name}"></a></h4></div>
+        </div>
+    </div>
+
+
+</div>
+<!-- 主体部分 for each-->
+<div class="series" th:each="lists : ${serieslist}">
+    <a th:href="@{'/good/series?seriesid='+${lists.seriesid}}"><img th:src="@{'/img/series/'+${lists.url}}" alt=""></a>
+    <div class="sinfo"><h1 th:text="${lists.name}"></h1></div>
+</div>
+
+<!-- 页脚部分 -->
+<div class="bottom">
+    <div class="join">
+        <h1>作为商家入驻</h1>
+        <p class="tinfo">加入我们，臻享体验</p>
+        <p class="litt"><a th:href="@{/shop/welcome}">了解详情</a></p>
+    </div>
+    <div class="call">
+        <h1>联系我们</h1>
+        <p class="tinfo">欢迎致电+86 400995888，24小时顾问在线答疑</p>
+        <p class="litt"><a href="#">了解详情</a></p>
+    </div>
+    <div class="afterservice">
+        <h1>我们提供的服务</h1>
+        <p class="tinfo">订制、调整您的珠宝，以及其他售后服务</p>
+        <p class="litt"><a href="#">了解详情</a></p>
+    </div>
+
+</div>
+</div>
+</body>
+</html>

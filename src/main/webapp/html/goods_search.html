@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购买</title>
+    <link rel="stylesheet" th:href="@{/CSS/goods_buy.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+    <script>
+        
+        window.onload=function(){
+                var flag1=document.getElementById("flag");
+                var t1 = document.getElementById("serch");
+                var t2 = document.getElementById("mymess");
+                var timer=null;
+                t1.onmouseover=flag1.onmouseover=function(){
+                        if(timer)clearTimeout(timer)
+                        t1.style.display=""
+                }
+                t1.onmouseout=flag1.onmouseout=function(){
+                        timer=setTimeout(function(){
+                            t1.style.display="none"
+                        },1000);
+                }
+                t2.onclick=function(){
+                
+                }
+        }
+        function over(){
+
+        }
+        function gimg1(){
+            var t1 = document.getElementById("gimg1");
+            var t2 = document.getElementById("gimg2");
+            var t3 = document.getElementById("big1");
+            var t4 = document.getElementById("big2");
+            t1.style.display=''
+            t2.style.display="none"
+            t3.className='color4'
+            t4.className='color3'
+        }
+        function gimg2(){
+            var t1 = document.getElementById("gimg1");
+            var t2 = document.getElementById("gimg2");
+            var t3 = document.getElementById("big1");
+            var t4 = document.getElementById("big2");
+            t2.style.display=''
+            t1.style.display="none"
+            t3.className='color3'
+            t4.className='color4'
+        }
+        function truebuy(){
+            var t1 = document.getElementById("teurbuy");
+            t1.style.display=''
+            var t2 = document.getElementById("gimg1");
+            var t4 = document.getElementById("gbig");
+            if (t2.style.display===''){
+                t4.value='样式1'
+            }else{
+                t4.value='样式2'
+            }
+
+        }
+        function truebuy1(){
+            var t1 = document.getElementById("teurbuy");
+            t1.style.display='none'
+        }
+        function cert(){
+            var t1 = document.getElementById("cert");
+            t1.style.display=''
+        }
+        function cert1(){
+            var t1 = document.getElementById("cert");
+            t1.style.display='none'
+        }
+        function moreinfo(){
+            var t1 = document.getElementById("moreinfo");
+            t1.style.display=''
+        }
+        function moreinfo1(){
+            var t1 = document.getElementById("moreinfo");
+            t1.style.display='none'
+        }
+        function checkbig() {
+
+        }
+    </script>
+</head>
+<body>
+    <div class="pro">
+        <!-- 导航栏部分 -->
+        <div class="navi">
+            <div class="logo"></div>
+            <div class="list">
+                <ul>
+                    <li class="search" title="搜索" id="flag"></li>
+                    <a th:href="@{/user/myinfo}"><li class="my" title="个人信息" id="mymess"></li></a>
+                    <a th:href="@{/user/index}"><li class="order" title="首页"></li></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 搜索框 无用时隐藏 -->
+        <div class="searchdiv0" id="serch" style="display: none;">
+            <!-- 搜索内容 -->
+            <div class="searchdiv">
+                    <input type="text" class="findmess" placeholder="搜索您感兴趣的珠宝"/><div class="find">搜索</div><div class="close" onclick=searchopen()></div>
+            </div>
+            <!-- 快捷标签库 -->
+            <div class="easytype">
+                <div class="lead"><h3>快捷标签</h3></div>
+                <!-- 这里我们for each渲染 -->
+                <div class="types"><h4><a href="www.bing.com">系列</a></h4></div>
+            </div>
+        </div>
+        
+
+        </div>
+        <!-- 提交订单部分 -->
+        <div class="goodsinfo">
+            <div class="goodsimg">
+                   <div class="goodimg1" id="gimg1" style="display: none;">
+                    <img th:src="@{'/img/goods/'+${good1.gmainimg}}" alt="">
+                   </div> 
+<!--                   <div class="goodimg2"id="gimg2">-->
+<!--                    <img th:src="@{'/img/goods/'+${img1.url}}" alt="">-->
+<!--                   </div> -->
+                   <div class="selectimg">
+                       <div class="color1" onclick=gimg1()>尺寸1</div>
+                       <div class="color2" onclick=gimg2()>尺寸2</div>
+                   </div>
+            </div>
+            <div class="buyinfo">
+                <div class="goodinfo" id="myinfo" style="">
+
+                      <table class="tab">
+                          <div class="title"><h1 th:text="${good1.gname}"></h1></div>
+                        <tr>
+                            <td>价格：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${good1.gprice}+'元'" readonly="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td>数量：</td>
+                            <td>
+                                <input type="number" min="1" step="1" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>分类大小:</td><td style="display: flex;"><div class="color3" id="big1" onclick=gimg1() >尺寸1</div>
+                                <div class="color4" id="big2" onclick=gimg2()>尺寸2</div></td>
+                        </tr>
+                        <tr>
+                            <td>鉴定证书：</td><td><div class="zs" style="cursor:pointer;" onclick="cert()">查看--></div></td>
+                        </tr>
+                        <tr>
+                            <td>详细参数：</td><td><div class="zs" style="cursor:pointer;" onclick="moreinfo()">查看--></div></td>
+                        </tr>
+                        
+                    </table>
+                    <!-- <div style="height: 30px;"></div> -->
+            
+                 <input class="btn1" type="submit" value="确认购买" onclick=truebuy()>    
+                 <a th:href="@{'/user/addlike?gno='+${good1.gno}+'&gname='+${good1.gname}+'&url1='+${good1.gmainimg}}"><input class="btn2" type="reset" value="加入收藏"></a>
+                </div>
+            </div>
+        </div>
+       <div class="truebuy" id="teurbuy" style="display: none;">
+           <div class="close11" onclick=truebuy1()></div>
+           <div class="title1"><h1 th:text="${good1.gname}"></h1></div>
+           <form th:action="@{/good/buygood}">
+
+        <table class="tab1">
+            <input type="text" th:value="${good1.gno}" style="display: none" name="gno"/>
+            <input type="text" th:value="${good1.gname}" style="display: none" name="gname"/>
+            <input type="text" th:value="${good1.gmainimg}" style="display: none" name="gurl"/>
+            <tr>
+                <td>收货人：</td><td><div class="in2"><input class="aid" name="pname" type="text" th:value="${user1.username}"></div></td>
+            </tr>
+            <tr>
+                <td>收货地址：</td><td><div class="in2"><input class="aid" name="place" type="text" th:value="${user1.place}"></div></td>
+            </tr>
+            <tr>
+                <td>购买样式：</td><td><div class="in2"><input id="gbig" name="gbig" class="aid" type="text"></div></td>
+            </tr>
+            <tr>
+                <td>价格：</td><td><div class="in2"><input class="call1" name="price" type="text" th:value="${good1.gprice}"></div></td>
+            </tr>
+            <tr>
+                <td>联系电话：</td><td><div class="in2"><input class="place" name="call" type="text" th:value="${user1.call}"></div></td>
+            </tr>
+            
+        </table>
+        <div style="height: 30px;"></div>
+
+     <input class="btn3" type="submit" value="确认支付">
+           </form>
+       </div>
+       <!-- 鉴定证书 一般为隐藏 -->
+       <div class="truebuy" id="cert" style="display: none;">
+            <div class="close11" onclick=cert1()></div>
+            <img th:src="@{/img/4.jpg}" alt="">
+       </div>
+       <!-- 详细参数 一般为隐藏 -->
+       <div class="truebuy" id="moreinfo" style="display: none;">
+        <div class="close11" onclick=moreinfo1()></div>
+     <div class="title1"><h1 th:text="${good1.gname}"></h1></div>
+     <table class="tab1">
+         <tr>
+             <td>重量：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${good.gweight}+'克'"></div></td>
+         </tr>
+         <tr>
+             <td>品牌：</td><td><div class="in2"><input class="call1" name="call" type="text" th:value="${good.gbrand}" ></div></td>
+         </tr>
+         <tr>
+             <td>材质：</td><td><div class="in2"><input class="place" name="place" type="text" th:value="${good.gmaterial}"></div></td>
+         </tr>
+         <tr>
+             <td>简介：</td><td><div class="in3"><textarea style="width: 100%; height: 100%;" th:text="${good.gintro}" rows="10" cols="20"></textarea></div></td>
+         </tr>
+         
+     </table>    
+    </div>
+        <!-- 页脚部分 -->
+        <div class="bottom">
+            <div class="join">
+                <h1>作为商家入驻</h1>
+                <p class="tinfo">加入我们，臻享体验</p>
+                <p class="litt"><a th:href="@{/shop/welcome}">了解详情</a></p>
+            </div>
+            <div class="call">
+               <h1>联系我们</h1> 
+               <p class="tinfo">欢迎致电+86 400995888，24小时顾问在线答疑</p>
+               <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+            <div class="afterservice">
+                <h1>我们提供的服务</h1>
+                <p class="tinfo">订制、调整您的珠宝，以及其他售后服务</p>
+                <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+<body>
+<form action="upload.do" method="post" enctype="multipart/form-data" content="multipart/form-data">
+    <input type="hidden" name="id" th:value="${id}">
+    <input type="file" name="file">
+    <input type="submit">
+</form>
+
+</body>
+</html>

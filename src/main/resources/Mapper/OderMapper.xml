@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.OrderMapper">
+    <!--查询操作-->
+    <select id="list" resultType="com.test.obj.Order">
+        select * from order_main where uid=#{uid}
+    </select>
+    <update id="insert" parameterType="com.test.obj.Order">
+	insert into order_main(gno,uid,gname,gprice,pname,oplace,gbig,pcall,stat,ourl,otime)
+	value(#{gno}, #{uid}, #{gname},#{gprice},#{pname},#{oplace},#{gbig},#{pcall},#{stat},#{ourl},now())
+	</update>
+    <update id="updateorder" parameterType="com.test.obj.Order">
+        update order_main set `stat`="已完成" where `oid`=#{oid}
+    </update>
+</mapper>

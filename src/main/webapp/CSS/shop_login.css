@@ -1,0 +1,132 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.pro{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    /* background-color: gray; */
+    background-image: url("../img/4.jpg");
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.login{
+    background-color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin-top: 150px;
+    margin-left: 40vw;
+    width: 360px;
+    height: 400px;
+    display: inline-block;
+    border-radius: 15px;
+}
+.reg{
+    background-color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 35vw;
+    width: 500px;
+    height: 700px;
+    display: inline-block;
+    border-radius: 15px;
+
+}
+.reginfo{
+    width: 360px;
+    height: 193px;
+    /* border: 1px solid black; */
+    overflow-y: scroll;
+}
+.reginfo::-webkit-scrollbar{
+    display: none;
+}
+.tab{
+    margin: auto;
+    margin-top: 20px;
+    border-spacing: 0 30px;
+}
+.tab1{
+    margin: auto;
+    margin-top: 5px;
+    border-spacing: 0 25px;
+}
+.in1,.in2{
+    /* border: 1px solid black; */
+    width: 250px;
+    height: 30px;
+    overflow: hidden;
+    border-bottom: 1px solid black;
+    display:flex;
+}
+.in1:hover,.in2:hover{
+    border-bottom: 1px solid cornflowerblue;
+}
+.username,.userpass{
+    margin: auto;
+    width: 230px;
+    height: 30px;
+    align-items: center;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.btn{
+    margin-top: 15px;
+    color: white;
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color:rgb(78,110, 242);
+    border: 0;
+}
+.btn2{
+    /* margin-top: 0px; */
+    color: white;
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color:rgb(78,110, 242);
+    border: 0;
+}
+.btn1,.btn3{
+    margin-top: 10px;
+    color: white;
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color:rgb(108,123,139);
+    border: 0;
+}
+video{
+
+    position: fixed;
+
+    right:0;
+
+    bottom: 0;
+
+    min-width: 100%;
+
+    min-height: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    z-index: -9999;
+
+    /*灰色调*/
+
+    /*-webkit-filter:grayscale(100%)*/
+
+}
+.msg{
+    width: 100%;
+    height: 20px;
+    /*border: 1px solid black;*/
+}

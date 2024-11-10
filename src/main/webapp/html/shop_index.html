@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商家信息</title>
+    <link rel="stylesheet" th:href="@{/CSS/shop_index.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+    <script>
+        function select(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            myinfo.style.display=""
+            myorder.style.display="none"
+            mylike.style.display="none"
+        }
+        function select1(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            myorder.style.display=""
+            mylike.style.display="none"
+            myinfo.style.display="none"
+        }
+        function select2(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            mylike.style.display=""
+            myorder.style.display="none"
+            myinfo.style.display="none"
+        }
+        function cert(){
+            var t1 = document.getElementById("icon");
+            t1.style.display=''
+        }
+        function cert1(){
+            var t1 = document.getElementById("icon");
+            t1.style.display='none'
+        }
+        function cert2(){
+            var t1 = document.getElementById("upgoodicon");
+            t1.style.display=''
+        }
+        function cert3(){
+            var t1 = document.getElementById("upgoodicon");
+            t1.style.display='none'
+        }
+        function zz(){
+            var t1 = document.getElementById("cert");
+            t1.style.display=''
+        }
+        function zz1(){
+            var t1 = document.getElementById("cert");
+            t1.style.display='none'
+        }
+    </script>
+</head>
+<body>
+<div class="pro">
+    <!-- 导航栏部分 -->
+    <div class="navi">
+        <div class="logo"></div>
+    </div>
+
+</div>
+<!-- 主体部分 for each-->
+<div class="big">
+    <div class="list1">
+        <div class="dephoto">
+
+            <div class="photo1"><img th:src="@{'/img/photo/'+${shop.url}}"></div>
+            <div class="perinfo">
+                <div class="name" th:text="'商家名:'+${shop.sname}"></div><div class="money" th:text="'余额：'+${shop.money}"></div>
+            </div>
+            <div class="out" onclick=cert()>【上传营业执照】</div>
+            <div class="out1"><a th:href="@{/shop/loginout}">【退出登录】</a></div>
+
+        </div>
+        <div class="myinfo1" onclick=select()>店铺信息</div>
+        <div class="myinfo1" onclick=select1()>添加商品</div>
+        <div class="myinfo1" onclick=select2()>我的商品</div>
+    </div>
+    <div class="uploadicon"id="icon" style="display: none;">
+        <div class="close11" onclick=cert1()></div>
+        <form class="icon" th:action="@{/shop/uploadicon}" method="post" enctype="multipart/form-data" content="multipart/form-data">
+            <input name="file" type="file">
+            <input class="btn3" type="submit" value="确认修改">
+        </form>
+    </div>
+    <div class="myinfo" id="myinfo">
+        <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">店铺信息</h2></div>
+        <div class="info2">
+            <form th:action="@{/shop/editinfo}">
+                <table class="tab" >
+                    <tr>
+                        <td>账号：</td><td><div class="in2"><input class="aid" name="sno" type="text" th:value="${shop.sno}" readonly="true"></div></td>
+                    </tr>
+                    <tr>
+                        <td>店铺名称：</td>
+                        <td>
+                            <div class="in2"><input class="aid" name="sname" type="text" th:value="${shop.sname}" ></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>店铺属地：</td><td><div class="in2"><input class="username" name="slocal" type="text" th:value="${shop.slocal}"></div></td>
+                    </tr>
+                    <tr>
+                        <td>营业执照：</td><td><a class="zz" onclick=zz() style="text-decoration: none">查看</a> </td>
+                    </tr>
+                    <tr>
+                        <td>法人姓名：</td><td><div class="in2"><input class="call1" name="spname" type="text" th:value="${shop.spname}"></div></td>
+                    </tr>
+                    <tr>
+                        <td>联系电话：</td><td><div class="in2"><input class="place" name="call" type="text" th:value="${shop.call}"></div></td>
+                    </tr>
+
+                </table><input class="btn1" type="submit" value="确认修改">
+                <input class="btn2" type="reset" value="重置">
+            </form>
+
+
+        </div>
+    </div>
+    <div class="truebuy" id="cert" style="display: none;">
+        <div class="close11" onclick=zz1()></div>
+        <img th:src="@{'/img/scert/'+${shop.scert}}" alt="">
+    </div>
+    <!-- 我的订单 -->
+    <div class="myorder" id="myorder" style="display: none;">
+        <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">添加商品</h2></div>
+        <div class="info3">
+            <form th:action="@{/shop/addgoods}">
+                <table class="tab1" >
+                    <tr>
+                        <td>商品编号：</td><td><div class="in2"><input class="aid" name="gno" type="text"></div></td>
+                    </tr>
+                    <tr>
+                        <td>所属分类：</td>
+                        <td>
+                            <div class="in2">
+                                <select name="typeid" style="width:100%;border: none;outline: none;">
+                                    <option th:each="lists : ${typelist}" th:text="${lists.typename}" th:value="${lists.typeid}"></option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>所属系列：</td>
+                        <td>
+                            <div class="in2">
+                                <select name="seriesid" style="width:100%;border: none;outline: none;">
+                                    <option th:each="lists : ${serieslist}" th:text="${lists.name}" th:value="${lists.seriesid}"></option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>商品名称：</td><td><div class="in2"><input class="username" name="gname" type="text" ></div></td>
+                    </tr>
+                    <tr>
+                        <td>价格：</td><td><div class="in2"><input class="call1" name="gprice" type="text"></div></td>
+                    </tr>
+                    <tr>
+                        <td>品牌：</td><td><div class="in2"><input class="place" name="gbrand" type="text"></div></td>
+                    </tr>
+                    <tr>
+                        <td>重量：</td><td><div class="in2"><input class="place" name="gweight" type="text"></div></td>
+                    </tr>
+                    <tr>
+                        <td>材质：</td><td><div class="in2"><input class="place" name="gmaterial" type="text"></div></td>
+                    </tr>
+                    <tr>
+                        <td>介绍：</td><td><div class="in2"><textarea name="gintro" style="width: 100%; height: 100%;outline: none" rows="10" cols="20"></textarea></div></td>
+                    </tr>
+
+                </table><input class="btn1" type="submit" value="确认添加">
+                <input class="btn2" type="reset" value="重置">
+            </form>
+        </div>
+    </div>
+    <!--        我的商品-->
+    <div class="myorder" id="mylike" style="display: none;">
+        <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">我的商品</h2></div>
+        <div class="info3">
+            <div class="orderinfo0" th:each="goodlist : ${goodlist}">
+                <!--                        图片文字部分小套子垂直分布-->
+                <div class="orderinfo1">
+                    <div class="orderimg"><img th:src="@{'/img/goods/'+${goodlist.gmainimg}}"></div>
+                </div>
+                <!--                        商品详细信息及商品状态-->
+                <div class="otherinfo">
+                    <table class="tab2">
+                        <tr>
+                            <td>商品名：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${goodlist.gname}" readonly="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td>价格：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${goodlist.gprice}" readonly="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td>品牌：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${goodlist.gbrand}" readonly="true"></div></td>
+                        </tr>
+                        <tr>
+                        <td>材质：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${goodlist.gmaterial}" readonly="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td>创建时间：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${goodlist.ctime}" readonly="true"></div></td>
+                        </tr>
+
+
+                    </table>
+                    <div class="orderstat">
+                        <bottom class="statbtn" th:if="${goodlist.stat==0}">审核中</bottom>
+                        <bottom class="statbtn" th:if="${goodlist.stat==1}">已上架</bottom>
+                        <bottom class="statbtn" th:if="${goodlist.stat==2}" >已售出</bottom>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+<!--    商品上传图片-->
+    <div class="uploadicon" id="upgoodicon" style="display: none;">
+        <div class="close11" onclick= cert3()></div>
+        <form class="icon" th:action="@{/shop/upgoodicon}" method="post" enctype="multipart/form-data" content="multipart/form-data">
+            <input name="file" type="file">
+            <input class="btn3" type="submit" value="确认修改">
+        </form>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>

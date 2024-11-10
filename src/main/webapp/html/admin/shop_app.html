@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div style="margin-top: 5px; margin-left: 5px">
+        商店名
+        <div class="layui-inline">
+            <input class="layui-input" name="sname" id="sname" type="text">
+        </div>
+        <button type="submit" class="layui-btn" id="reload" lay-submit lay-filter="search" >搜索</button>
+        <button class="layui-btn" lay-event="refresh" onclick="refresh()">刷新</button>
+    </div>
+</form>
+
+
+<table id="test" lay-filter="testfilter"></table>
+
+<script id="toolbar" type="text/html">
+    <a class="layui-btn layui-btn-xs" lay-event="allow">通过</a>
+    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="qcert">资格证书</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reject">拒绝</a>
+
+</script>
+
+<script id="h_toolbar" type="text/html">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="insert">新增</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除所选内容</button>
+    </div>
+</script>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+
+<script th:inline="javascript">
+
+    function reset(){
+        $("#search").click()
+    }
+
+    function refresh(){
+        $('input').attr("value","")
+        reset()
+    }
+
+
+    let contextpath = [[@{/}]];
+
+        layui.use(['table','form','layer'],function () {
+            var table = layui.table;
+            var form = layui.form;
+
+
+            table.render({
+                elem:'#test',
+                id:"shop_list",
+                url: contextpath  + 'admin/shop/shop_app.do',
+                page:true,
+                limit:10,
+                toolbar: '#h_toolbar',
+                cols: [
+                    [
+                        // {type: 'checkbox', fixed: 'left'},
+                        {field: 'sno', title:'商店ID', sort: true},
+                        {field: 'sname',title: '商店名'},
+                        {field: 'slocal',title: '地点'},
+                        {field: 'scert',title: '营业执照编号',sort: true},
+                        {field: 'sstat',title: '营业状态'},
+                        {field: 'aid',title: '持有人ID',sort: true},
+                        {fixed: 'right',title: '操作', toolbar: '#toolbar', align:'center',width:200 }
+                    ]
+                ]
+
+            })
+            // 头部工具栏
+            table.on('toolbar(testfilter)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch(obj.event){
+                    case 'insert':
+
+                        layer.msg('添加');
+                        break;
+                    case 'del':
+                        console.log(obj)
+                        layer.msg('删除');
+                        break;
+
+                };
+            });
+            // 多选框
+            table.on('checkbox(testfilter)', function (obj) {
+                console.log(obj)
+            });
+
+            // 工具条
+            table.on('tool(testfilter)', function(obj){
+                var data = obj.data;
+                //console.log(obj)
+                if(obj.event === 'allow'){
+                    layer.confirm('确定通过?', function(index){
+                        var url = contextpath + "admin/shop/update_flag"
+                        console.log(data.sno)
+                        var params={
+                            flag : 1,
+                            sno : data.sno
+                        }
+                        $.post(url,params, function (response) {
+                            if (response == 0){
+                                layer.msg("操作失败")
+
+                            }else {
+                                layer.msg("操作成功")
+                                table.reload('shop_list');
+                            }
+                        })
+
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'reject'){
+                    layer.confirm('确定拒绝?', function(index){
+                        var url = contextpath + "admin/shop/update_flag"
+                        console.log(data.sno)
+                        var params={
+                            flag : 2,
+                            sno : data.sno
+                        }
+                        $.post(url,params, function (response) {
+                            if (response == 0){
+                                layer.msg("操作失败")
+
+                            }else {
+                                layer.msg("操作成功")
+                                table.reload('shop_list');
+                            }
+                        })
+
+                        layer.close(index);
+                    });
+
+                }else if (obj.event === 'qcert'){
+
+                    var url = contextpath+'admin/shop/qcert?sno='+data.sno
+
+                    $.post(url,function (response) {
+                        var img = '<img src="' +response+'" width="100%" height="auto" >'
+                        layer.open({
+                            type: 1,
+                            title:'资格证书',
+                            area:['1000px','500px'],
+                            content: img
+                        })
+                    })
+
+
+
+
+
+            }
+            });
+
+            form.on('submit(search)', function (data) {
+                table.reload('shop_list',{
+                    page: {
+                        curr: 1
+                    },
+                    where:{
+                        "search" : data.field.sname
+                    }
+                }, 'data')
+                return false;
+            });
+        })
+</script>
+
+
+</body>
+</html>

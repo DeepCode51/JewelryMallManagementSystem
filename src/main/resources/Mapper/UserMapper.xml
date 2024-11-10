@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.UserMapper">
+    <!--查询一个操作-->
+    <select id="login" resultType="com.test.obj.User" parameterType="com.test.obj.User">
+        select * from user
+        <where><!--动态SQL语句自行判断，会动态判断是否写where-->
+         <if test="aid!=null">
+            and aid=#{aid}
+         </if>
+         <if test="userpass!=null">
+             and userpass=#{userpass}
+         </if>
+        </where>
+    </select>
+    <!--查询操作-->
+    <select id="list" resultType="com.test.obj.User">
+        select * from user
+    </select>
+    <!--查询操作-->
+    <select id="findone" resultType="com.test.obj.User">
+        select * from user where aid=#{aid}
+    </select>
+    <!--插入操作-->
+    <insert id="insert" parameterType="com.test.obj.User">
+        insert into user values(#{aid},#{username},#{userpass},#{sex},#{call},null,#{createtime},null,0,0)
+    </insert>
+    <!--插入操作-->
+    <insert id="addlike" parameterType="com.test.obj.Like">
+        insert into user_like (uid,gno,gname,url)values(#{uid},#{gno},#{gname},#{url})
+    </insert>
+    <select id="listlike" resultType="com.test.obj.Like">
+        select * from user_like where uid=#{uid}
+    </select>
+    <!--修改操作-->
+    <update id="updateicon" parameterType="com.test.obj.User">
+        update user set `icon`=#{icon}
+        where `aid`=#{aid}
+    </update>
+    <update id="updatemoney" parameterType="com.test.obj.User">
+        update user set `money`=#{money}
+        where `aid`=#{aid}
+    </update>
+    <update id="editinfo" parameterType="com.test.obj.User">
+        update user set `sex`=#{sex},`username`=#{username},`call`=#{call},`place`=#{place}
+        where `aid`=#{aid}
+    </update>
+    <!--删除操作-->
+    <delete id="delete" parameterType="com.test.obj.User">
+        delete from user where aid=#{aid}
+    </delete>
+    <delete id="removelike" parameterType="com.test.obj.Like">
+        delete from user_like where uid=#{uid} and gno=#{gno}
+    </delete>
+</mapper>

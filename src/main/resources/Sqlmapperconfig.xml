@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+                PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--通过properties标签加载外部properties文件-->
+    <properties resource="jdbc.properties"/>
+    <!--自定义别名,自定义的位置必须在properties的下面-->
+    <!--为user层每个实体类创建别名，默认为小写-->
+    <typeAliases>
+        <package name="com.test.obj"/>
+    </typeAliases>
+
+    <environments default="development"><!--默认环境id-->
+        <environment id="development"><!--环境id-->
+            <transactionManager type="JDBC"/><!--事务类型--><!--另一类型MANAGED 这个配置几乎没做什么，是通过容器管理事务，默认情况下为关闭连接-->
+            <dataSource type="POOLED"><!--指定当前数据源类型是连接池//其他类型：UNPOOLED<每次请求时打开和关闭连接>；JNDI<暂时用不到>--><!--连接池-->
+                <property name="driver" value="${jdbc.driver}"/><!--配置连接池属性，数据源-->
+                <property name="url"
+                          value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!--加载映射文件-->
+    <mappers>
+        <!--多种加载方式-->
+        <mapper resource="Mapper\UserMapper.xml"/>
+<!--使用映射器接口实现类的完全限定类名    <mapper class="com.test.mybatis"/>-->
+<!--将包内的映射器接口实现全部注册为映射器 <package name="Mapper" />-->
+    </mappers>
+
+</configuration>

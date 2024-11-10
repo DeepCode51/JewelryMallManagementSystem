@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AdminUserMapper">
+    <!--登录-->
+    <select id="list_user" resultType="com.test.obj.User">
+        select * from user limit #{start},#{rows}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from user
+    </select>
+
+    <select id="search_name" resultType="com.test.obj.User">
+        select * from user where username like '%' #{username} '%' limit #{start},#{rows}
+    </select>
+
+    <select id="count_name" resultType="int">
+        select count(*) from user where username like '%' #{username} '%'
+    </select>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="username != null and username != '' ">
+                username = #{username},
+            </if>
+            <if test="userpass != null and userpass != ''">
+                userpass = #{userpass},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="call != null and call != ''">
+                `call` = #{call},
+            </if>
+            <if test="place != null and place != ''">
+                place = #{place},
+            </if>
+                able = #{able},
+
+        </set>
+        where aid = #{aid}
+    </update>
+    <select id="search_user" resultType="com.test.obj.User">
+        select * from user where aid = #{aid}
+    </select>
+    <delete id="delete">
+        delete from user where aid = #{aid}
+    </delete>
+
+</mapper>

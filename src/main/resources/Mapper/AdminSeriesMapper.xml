@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AdminSeriesMapper">
+
+    <select id="getClassify" resultType="com.test.obj.Classify">
+        select * from goods_type
+    </select>
+
+    <select id="series_list" resultType="com.test.obj.Series">
+        select * from goods_series limit #{start},#{rows}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from goods_series
+    </select>
+
+    <select id="search_classify" resultType="com.test.obj.Series">
+        select * from goods_series where classify = #{classify} limit #{start},#{rows}
+    </select>
+
+    <select id="search_id" resultType="com.test.obj.Series">
+        select * from goods_series where seriesid = #{seriesid}
+    </select>
+
+    <update id="update">
+        update goods_series
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="classify != null and classify != ''">
+                classify = #{classify},
+            </if>
+        </set>
+        where seriesid = #{seriesid}
+    </update>
+
+    <update id="insert_pic">
+        insert into goods_series_lunbo(seriesid,url) values (#{seriesid},#{url})
+    </update>
+
+    <delete id="delete">
+        delete from goods_series where seriesid = #{seriesid}
+    </delete>
+
+    <insert id="insert">
+        insert into goods_series(name,classify) values (#{name},#{classify})
+    </insert>
+
+    <select id="search" resultType="com.test.obj.Series">
+        select * from goods_series where name like '%' #{name} '%' limit #{start},#{rows}
+    </select>
+</mapper>

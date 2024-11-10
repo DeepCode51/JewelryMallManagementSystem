@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系列产品</title>
+    <link rel="stylesheet" th:href="@{/CSS/goods_series.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/CSS/lightslider.css}" />
+    <script th:src="@{/JS/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/JS/lightslider.js}"></script>
+    <link rel="stylesheet" th:href="@{/CSS/lightslider.css}"/>
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+   <script>
+        $(document).ready(function() {
+           $("#content-slider").lightSlider({
+               loop:true,
+               keyPress:true
+           });
+           $('#image-gallery').lightSlider({
+               gallery:true,
+               item:1,
+               thumbItem:9,
+               slideMargin: 0,
+               speed:500,
+               auto:true,
+               loop:true,
+               onSliderLoad: function() {
+                   $('#image-gallery').removeClass('cS-hidden');
+               }  
+           });
+       });
+   </script>
+    <script>
+        
+        window.onload=function(){
+                var flag1=document.getElementById("flag");
+                var t1 = document.getElementById("serch");
+                var t2 = document.getElementById("mymess");
+                var timer=null;
+                t1.onmouseover=flag1.onmouseover=function(){
+                        if(timer)clearTimeout(timer)
+                        t1.style.display=""
+                }
+                t1.onmouseout=flag1.onmouseout=function(){
+                        timer=setTimeout(function(){
+                            t1.style.display="none"
+                        },1000);
+                }
+                t2.onclick=function(){
+                
+                }
+        }
+        function over(){
+
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="pro">
+        <!-- 导航栏部分 -->
+        <div class="navi">
+            <div class="logo"></div>
+            <div class="list">
+                <ul>
+                    <li class="search" title="搜索" id="flag"></li>
+                    <a th:href="@{/user/myinfo}"><li class="my" title="个人信息" id="mymess"></li></a>
+                    <a th:href="@{/user/index}"><li class="home" title="首页"></li></a>
+                </ul>
+            </div>
+        </div>
+        <!-- 搜索框 无用时隐藏 -->
+        <div class="searchdiv0" id="serch" style="display: none;">
+            <!-- 搜索内容 -->
+            <div class="searchdiv">
+                    <input type="text" class="findmess" placeholder="搜索您感兴趣的珠宝"/><div class="find">搜索</div><div class="close" onclick=searchopen()></div>
+            </div>
+            <!-- 快捷标签库 -->
+            <div class="easytype">
+                <div class="lead"><h3>快捷标签</h3></div>
+                <!-- 这里我们for each渲染 -->
+                <div class="types"><h4><a href="www.bing.com">系列</a></h4></div>
+            </div>
+        </div>
+        
+
+        </div>
+        <!-- 轮播图部分 for each-->
+        <div class="series">
+            <div class="lunbo">
+                <img th:each="list : ${lunbolist}" th:src="@{'/img/lunbo/'+${list.url}}" >
+            </div>
+        </div>
+        <!-- 商品显示部分 -->
+        <div class="goodlist">
+            <div id="goodlist1" class="goodlist1">
+                
+                <!-- <div class="good"></div>
+                <div class="good"></div>
+                <div class="good"></div> -->
+                <div class="item">
+                    <ul id="content-slider" class="content-slider">
+                        <li th:each="goodlist: ${goodlist}">
+                            <a th:href="@{'/good/buy?gno='+${goodlist.gno}}">
+                            <div class="good">
+                                <div class="phot">
+                                    <img th:src="@{'/img/goods/'+${goodlist.gmainimg}}" alt="">
+                                </div>
+                                <div class="goodsinfo" style="color: black;margin-top: 30px;"><h2 th:text="${goodlist.gname}"></h2></div>
+                            </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 页脚部分 -->
+        <div class="bottom">
+            <div class="join">
+                <h1>作为商家入驻</h1>
+                <p class="tinfo">加入我们，臻享体验</p>
+                <p class="litt"><a th:href="@{/shop/welcome}">了解详情</a></p>
+            </div>
+            <div class="call">
+               <h1>联系我们</h1> 
+               <p class="tinfo">欢迎致电+86 400995888，24小时顾问在线答疑</p>
+               <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+            <div class="afterservice">
+                <h1>我们提供的服务</h1>
+                <p class="tinfo">订制、调整您的珠宝，以及其他售后服务</p>
+                <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

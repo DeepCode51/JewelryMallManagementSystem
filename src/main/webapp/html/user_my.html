@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <link rel="stylesheet" th:href="@{/CSS/user_my.css}">
+    <link rel="icon" th:href="@{/img/default.ico}" type="image/x-icon">
+    <script>
+        function select(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            myinfo.style.display=""
+            myorder.style.display="none"
+            mylike.style.display="none"
+        }
+        function select1(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            myorder.style.display=""
+            mylike.style.display="none"
+            myinfo.style.display="none"
+        }
+        function select2(){
+            var myinfo=document.getElementById("myinfo");
+            var myorder=document.getElementById("myorder");
+            var mylike=document.getElementById("mylike");
+            mylike.style.display=""
+            myorder.style.display="none"
+            myinfo.style.display="none"
+        }
+        function cert(){
+            var t1 = document.getElementById("icon");
+            t1.style.display=""
+        }
+        function cert1(){
+            var t1 = document.getElementById("icon");
+            t1.style.display='none'
+        }
+        function cert2(){
+            var t1 = document.getElementById("tipdel");
+            t1.style.display="block"
+        }
+        function cert3(){
+            var t1 = document.getElementById("tipdel");
+            t1.style.display="none"
+        }
+    </script>
+</head>
+<body>
+    <div class="pro">
+        <!-- 导航栏部分 -->
+        <div class="navi">
+            <div class="logo"></div>
+            <div class="list">
+                <ul>
+                    <a th:href="@{/user/index}"><li class="home" title="首页"></li></a>
+                </ul>
+            </div>
+        </div>
+    
+
+        <!-- 主体部分 for each-->
+    <div class="big">
+            <div class="list1">
+                <div class="dephoto">
+                    
+                    <div class="photo1"><img th:src="@{'/img/photo/'+${user.icon}}"></div>
+                    <div class="perinfo">
+                        <div class="name" th:text="'用户名:'+${user.username}"></div><div class="money" th:text="'余额：'+${user.money}"></div>
+                    </div>
+
+
+                    <div class="out" onclick=cert()>【修改头像】</div>
+                    <div class="out1"><a th:href="@{/user/loginout}">【退出登录】</a></div>
+                
+                </div>
+                <div class="myinfo1" onclick=select()>个人信息</div>
+                <div class="myinfo1" onclick=select1()>我的订单</div>
+                <div class="myinfo1" onclick=select2()>我的收藏</div>
+            </div>
+        <div class="uploadicon"id="icon" style="display: none;">
+            <div class="close11" onclick=cert1()></div>
+            <form class="icon" th:action="@{/user/uploadicon}" method="post" enctype="multipart/form-data" content="multipart/form-data">
+                <input name="file" type="file">
+                <input class="btn3" type="submit" value="确认修改">
+            </form>
+
+        </div>
+            <div class="myinfo" id="myinfo">
+               <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">个人信息</h2></div>
+               <div class="info2">
+                   <form class="tab1" th:action="@{/user/editinfo}">
+               <table class="tab" >
+                <tr>
+                    <td>账号：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${user.aid}" readonly="true"></div></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <input id="男" type="radio" checked="checked" name="sex" value="男"/>先生
+                        <input type="radio" id="女" name="sex" value="女">女士
+                    </td>
+                </tr>
+                <tr>
+                    <td>昵称：</td><td><div class="in2"><input class="username" name="username" type="text" th:value="${user.username}"></div></td>
+                </tr>
+                <tr>
+                    <td>联系方式：</td><td><div class="in2"><input class="call1" name="call" type="text" th:value="${user.call}"></div></td>
+                </tr>
+                <tr>
+                    <td>收货地址：</td><td><div class="in2"><input class="place" name="place" type="text" th:value="${user.place}"></div></td>
+                </tr>
+
+               </table><input class="btn1" type="submit" value="确认修改">
+                   <input class="btn2" type="reset" value="重置">
+                   </form>
+            <div style="height: 30px;"></div>
+            
+            </div>
+            </div>
+            <!-- 我的订单 -->
+            <div class="myorder" id="myorder" style="display: none;">
+                <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">我的订单</h2></div>
+                <div class="info2">
+<!--                    外层大套子宽度100%flex方向为row-->
+                    <div class="orderinfo0" th:each="orderlist : ${orderlist}">
+<!--                        图片文字部分小套子垂直分布-->
+                        <div class="orderinfo1">
+                            <div class="orderimg"><img th:src="@{'/img/goods/'+${orderlist.ourl}}"></div>
+<!--                            <div class="ordertext" th:text="${orderlist.gname}"></div>-->
+                        </div>
+<!--                        单价 收货信息及确认收货-->
+                        <div class="otherinfo">
+                            <table class="tab2">
+                                <tr>
+                                    <td>商品名：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.gname}" readonly="true"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>价格：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.gprice}" readonly="true"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>收件人：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.pname}" readonly="true"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>收货地址：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.oplace}" readonly="true"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>联系电话：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.pcall}" readonly="true"></div></td>
+                                </tr>
+                                <tr>
+                                    <td>下单时间：</td><td><div class="in2"><input class="aid" name="aid" type="text" th:value="${orderlist.otime}" readonly="true"></div></td>
+                                </tr>
+                            </table>
+                            <div class="orderstat">
+                                    <bottom class="statbtn" th:if="${orderlist.stat=='已发货'}" style="cursor: pointer" ><a th:href="@{'/user/updateorder?oid='+${orderlist.oid}}" style="background-color: transparent;text-decoration: none;color: white">确认收货</a></bottom>
+                                    <bottom class="statbtn" th:if="${orderlist.stat=='已付款'}" readonly="true">待发货</bottom>
+                                    <bottom class="statbtn" th:if="${orderlist.stat=='已完成'}" readonly="true">已完成</bottom>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+             </div>
+<!--        我的收藏-->
+            <div class="myorder" id="mylike" style="display: none;">
+            <div class="title1"><h2 style="margin-left: 50px;line-height: 200%;">我的收藏</h2></div>
+            <div class="info3">
+                <div class="likeinfo" th:each="likelist : ${likelist}">
+                    <a th:href="@{'/good/buy?gno='+${likelist.gno}}">  <div class="orderimg"><img th:src="@{'/img/goods/'+${likelist.url}}"></div></a>
+<!--                    <div class="ordertext" th:text="${likelist.gname}"></div>-->
+                    <div class="cancelbtn" ><a style="text-decoration: none;color: white" th:href="@{'/user/removelike?gno='+${likelist.gno}}">取消收藏</a></div>
+<!--                    onclick=cert2()-->
+                </div>
+            </div>
+        </div>
+     </div>
+<!--取消收藏确认框-->
+        <div class="tipDel" id="tipdel">
+            <p>确定要取消该商品收藏吗？</p>
+            <p class="clearfix"><a class="fl cer" href="#">确定</a><a class="fr cancel" onclick=cert3()>取消</a></p>
+        </div>
+        <!-- 页脚部分 -->
+        <div class="bottom">
+            <div class="join">
+                <h1>作为商家入驻</h1>
+                <p class="tinfo">加入我们，臻享体验</p>
+                <p class="litt"><a th:href="@{/shop/welcome}">了解详情</a></p>
+            </div>
+            <div class="call">
+               <h1>联系我们</h1> 
+               <p class="tinfo">欢迎致电+86 400995888，24小时顾问在线答疑</p>
+               <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+            <div class="afterservice">
+                <h1>我们提供的服务</h1>
+                <p class="tinfo">订制、调整您的珠宝，以及其他售后服务</p>
+                <p class="litt"><a href="#">了解详情</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

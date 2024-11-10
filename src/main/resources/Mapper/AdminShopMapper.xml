@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AdminShopMapper">
+
+    <!--罗列操作-->
+    <select id="list_shop" resultType="com.test.obj.Shop">
+        select * from shop where flag = #{flag} limit #{start},#{rows}
+    </select>
+    <!--修改操作-->
+    <update id="update_shop">
+        update shop
+        <set>
+                sname = #{sname},
+
+                slocal = #{slocal},
+
+                scert = #{scert},
+
+                sstat = #{sstat},
+
+                aid = #{aid},
+
+                flag = #{flag},
+
+        </set>
+        where sno = #{sno}
+    </update>
+
+    <delete id="shop_delete">
+        delete from shop where sno = #{sno}
+    </delete>
+
+
+    <select id="search_sname" resultType="com.test.obj.Shop">
+        select * from shop where sname like '%' #{sname} '%' and flag = #{flag} limit #{start},#{rows}
+    </select>
+
+    <select id="search_sno" resultType="com.test.obj.Shop">
+        select * from shop where sno = #{sno}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from shop where flag = #{flag}
+    </select>
+
+    <delete id="batchDelete">
+        delete from shop where sno in
+        <foreach collection="list" item="sno" separator="," open="(" close=")">
+            #{sno}
+        </foreach>
+    </delete>
+
+    <select id="pic_url" resultType="string">
+        select scert from shop where sno = #{sno}
+    </select>
+
+</mapper>

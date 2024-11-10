@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AdminGoodsMapper">
+    <!--登录-->
+    <select id="getSeries" resultType="com.test.obj.Series">
+        select * from goods_series
+    </select>
+
+    <select id="list_goods" resultType="com.test.obj.Goods">
+        select * from goods_main where stat = #{stat} limit #{start},#{rows}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from goods_main where stat = #{stat}
+    </select>
+
+    <select id="bySeries" resultType="com.test.obj.Goods">
+        select * from goods_main where seriesid = #{series} and stat = 1 limit #{start},#{rows}
+    </select>
+
+    <select id="count_series" resultType="int">
+        select count(*) from goods_main where seriesid = #{series}
+    </select>
+
+    <select id="search_name" resultType="com.test.obj.Goods">
+        select * from goods_main where gname like '%' #{gname} '%' and stat = #{stat} limit #{start},#{rows}
+    </select>
+
+    <select id="count_name" resultType="int">
+        select count(*) from goods_main where gname like '%' #{gname} '%'
+    </select>
+
+    <update id="update">
+        update goods_main
+        <set>
+            <if test="seriesid != null and seriesid != '' ">
+                seriesid = #{seriesid},
+            </if>
+            <if test="gname != null and gname != ''">
+                gname = #{gname},
+            </if>
+            <if test="gprice != null and gprice != ''">
+                gprice = #{gprice},
+            </if>
+            <if test="gbrand != null and gbrand != ''">
+                gbrand = #{gbrand},
+            </if>
+            <if test="gmaterial != null and gmaterial != ''">
+                gmaterial = #{gmaterial},
+            </if>
+            <if test="gmainimg != null and gmainimg != ''">
+                gmainimg = #{gmainimg},
+            </if>
+            <if test="stat != null and stat != ''">
+                stat = #{stat},
+            </if>
+        </set>
+        where gno = #{gno}
+    </update>
+
+    <select id="search_good" resultType="com.test.obj.Goods">
+        select * from goods_main where gno = #{gno}
+    </select>
+
+    <delete id="delete">
+        delete from goods_main where gno = #{gno}
+    </delete>
+
+    <delete id="delete_img">
+        delete from goods_img where gno = #{gno}
+    </delete>
+
+    <select id="pic_url" resultType="string">
+        select url from goods_img where type ='zs' and gno = #{gno}
+    </select>
+</mapper>

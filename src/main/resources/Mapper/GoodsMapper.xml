@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.GoodsMapper">
+    <!--查询操作-->
+    <select id="loadseries" resultType="com.test.obj.Goods">
+        select * from goods_main where seriesid=#{seriesid}
+    </select>
+    <!--查询操作-->
+    <select id="loadgoods" resultType="com.test.obj.Goods">
+        select * from goods_main where gno=#{gno}
+    </select>
+    <!--查询操作-->
+    <select id="loadimg" resultType="com.test.obj.Img">
+        select * from goods_img where gno=#{gno}
+    </select>
+    <insert id="insert" parameterType="com.test.obj.Goods">
+        insert into goods_main (gno,typeid,seriesid,gname,gprice,gbrand,gweight,gmaterial,gintro,shopid,ctime)values
+        (#{gno},#{typeid},#{seriesid},#{gname},#{gprice},#{gbrand},#{gweight},#{gmaterial},#{gintro},#{shopid},now())
+    </insert>
+    <select id="search" resultType="com.test.obj.Goods">
+        select * from goods_main where gname like '%' #{gname} '%'
+    </select>
+</mapper>
